@@ -28,6 +28,6 @@ export class FalconeService {
       'Accept': 'application/json'
     });
 
-    return this.http.post(this.configUrl + '/token', {headers: httpHeaders});
+    return this.http.post(this.configUrl + '/token', { body: ''}, { headers: httpHeaders });
   }
 }

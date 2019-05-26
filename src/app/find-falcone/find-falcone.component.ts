@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FalconeService } from '../shared/services/falcone.service';
-import { Planets } from '../shared/models/planets.model';
+import { Final } from '../shared/models/final.model';
 
 @Component({
   selector: 'app-find-falcone',
@@ -12,39 +12,41 @@ export class FindFalconeComponent implements OnInit {
   // Existing Data
 
   planets: any;
-  token: any;
+  tokenObject: any;
   vehicles: any;
+
+  finalResult: Final;
 
   constructor(private service: FalconeService) { }
 
   ngOnInit() {
-    this.getPlanets();
-    this.getVehicles();
-    this.getToken();
+    this.finalResult = new Final();
+    this.getData();
   }
 
-  getPlanets() {
+  getData() {
+
+    // Get Planet Data
     this.service.getPlanets().subscribe(res => {
       this.planets = res;
+      console.log(this.planets);
     }, error => {
       console.log(error);
     });
-  }
 
-  getVehicles() {
+    // Get Vehicle Data
     this.service.getVehicles().subscribe( res => {
       this.vehicles = res;
     }, error => {
       console.log(error);
     });
-  }
 
-  getToken() {
-    this.service.getToken().subscribe( res => {
-      console.log(res);
+    // Get and Set the Application Token
+    this.service.requestToken().subscribe( res => {
+      this.tokenObject = res;
+      this.finalResult.token = this.tokenObject.token;
     }, error => {
       console.log(error);
     });
   }
-
 }

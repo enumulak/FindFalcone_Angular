@@ -1,5 +1,17 @@
-<ul>
-  <li *ngFor="let planet of planets">
-    {{planet.name}}, {{planet.distance}}
-  </li>
-</ul>
+<div class="container">
+
+  <form>
+    <div class="form-group">
+      <label for="planetSelection">The Planets</label>
+      <select id="selectPlanet" class="form-control">
+        <option selected>Choose One...</option>
+        <option *ngFor="let planet of planets">
+          {{planet.name}}
+        </option>
+      </select>
+    </div>
+  </form>
+
+  <h4>The Token: {{finalResult.token}}</h4>
+
+</div>
