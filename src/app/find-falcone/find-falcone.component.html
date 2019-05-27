@@ -6,12 +6,16 @@
       <select id="selectPlanet" class="form-control">
         <option selected>Choose One...</option>
         <option *ngFor="let planet of planets">
-          {{planet.name}}
+          {{planet.name}}, Distance: {{planet.distance}}
         </option>
       </select>
     </div>
   </form>
 
   <h4>The Token: {{finalResult.token}}</h4>
+
+  <br>
+
+  <h2>Time Taken: {{totalTimeTaken}}</h2>
 
 </div>

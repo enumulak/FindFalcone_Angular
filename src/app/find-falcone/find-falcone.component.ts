@@ -9,29 +9,33 @@ import { Final } from '../shared/models/final.model';
 })
 export class FindFalconeComponent implements OnInit {
 
-  // Existing Data
-
+  // Required Data
   planets: any;
   tokenObject: any;
   vehicles: any;
 
   finalResult: Final;
 
+  // Helper Variables
+  currentIteration: number;
+  totalTimeTaken: number;
+
   constructor(private service: FalconeService) { }
 
   ngOnInit() {
     this.finalResult = new Final();
+    this.currentIteration = 0;
+    this.totalTimeTaken = 0;
     this.getData();
   }
 
   getData() {
 
     // Get Planet Data
-    this.service.getPlanets().subscribe(res => {
+    this.service.getPlanets().subscribe( res => {
       this.planets = res;
-      console.log(this.planets);
-    }, error => {
-      console.log(error);
+      }, error => {
+        console.log(error);
     });
 
     // Get Vehicle Data
@@ -45,6 +49,7 @@ export class FindFalconeComponent implements OnInit {
     this.service.requestToken().subscribe( res => {
       this.tokenObject = res;
       this.finalResult.token = this.tokenObject.token;
+      console.log(this.finalResult);
     }, error => {
       console.log(error);
     });
