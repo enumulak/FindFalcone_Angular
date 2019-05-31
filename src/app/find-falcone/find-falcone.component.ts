@@ -14,6 +14,7 @@ export class FindFalconeComponent implements OnInit {
   tokenObject: any;
   vehicles: any;
 
+  // Final Data that will be sent to Back-End
   finalResult: Final;
 
   // Helper Variables
@@ -23,9 +24,13 @@ export class FindFalconeComponent implements OnInit {
   constructor(private service: FalconeService) { }
 
   ngOnInit() {
+
+    // Initialize Helper Variables
     this.finalResult = new Final();
     this.currentIteration = 0;
     this.totalTimeTaken = 0;
+
+    // Get required Data from the Back-End
     this.getData();
   }
 
@@ -41,6 +46,7 @@ export class FindFalconeComponent implements OnInit {
     // Get Vehicle Data
     this.service.getVehicles().subscribe( res => {
       this.vehicles = res;
+      console.log(this.vehicles);
     }, error => {
       console.log(error);
     });
