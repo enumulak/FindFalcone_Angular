@@ -1,7 +1,13 @@
+import { ResultComponent } from './result/result.component';
+import { FindFalconeComponent } from './find-falcone/find-falcone.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
-const routes: Routes = [];
+const routes: Routes = [
+  { path: 'findfalcone', component: FindFalconeComponent },
+  { path: 'result', component: ResultComponent },
+  { path: '', redirectTo: '/findfalcone', pathMatch: 'full' }
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

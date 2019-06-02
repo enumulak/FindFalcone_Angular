@@ -5,11 +5,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FindFalconeComponent } from './find-falcone/find-falcone.component';
+import { ResultComponent } from './result/result.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    FindFalconeComponent
+    FindFalconeComponent,
+    ResultComponent
   ],
   imports: [
     BrowserModule,
