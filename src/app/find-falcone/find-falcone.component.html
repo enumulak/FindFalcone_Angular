@@ -27,4 +27,20 @@
     </div>
   </div>
 
+  <div class="row text-center">
+    <div class="col-md-10">
+      <form>
+          <div class="form-group">
+            <label for="vehicleSelection">The Vehicles</label>
+            <select id="selectVehicle" class="form-control">
+              <option selected>Choose One...</option>
+              <option *ngFor="let vehicle of vehicles">
+                {{vehicle.name}}
+              </option>
+            </select>
+          </div>
+        </form>
+    </div>
+  </div>
+
 </div>

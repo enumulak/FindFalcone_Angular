@@ -9,4 +9,8 @@ export class Planets implements Deserializable {
         Object.assign(this, input);
         return this;
     }
+
+    getName() {
+        return this.name;
+    }
 }

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FalconeService } from '../shared/services/falcone.service';
 import { Final } from '../shared/models/final.model';
+import { Planets } from '../shared/models/planets.model';
+import { Vehicles } from '../shared/models/vehicles.model';
+
 
 @Component({
   selector: 'app-find-falcone',
@@ -10,9 +13,10 @@ import { Final } from '../shared/models/final.model';
 export class FindFalconeComponent implements OnInit {
 
   // Required Data
-  planets: any;
   tokenObject: any;
-  vehicles: any;
+  // public planets: Planets[];
+  public vehicles: Vehicles[];
+  planets: any;
 
   // Final Data that will be sent to Back-End
   finalResult: Final;
@@ -31,33 +35,37 @@ export class FindFalconeComponent implements OnInit {
     this.totalTimeTaken = 0;
 
     // Get required Data from the Back-End
-    this.getData();
+    this.getToken();
+    // this.getPlanets();
+    // this.getVehicles();
+    this.getAllPlanets();
   }
 
-  getData() {
-
-    // Get Planet Data
-    this.service.getPlanets().subscribe( res => {
-      this.planets = res;
-      }, error => {
-        console.log(error);
-    });
-
-    // Get Vehicle Data
-    this.service.getVehicles().subscribe( res => {
-      this.vehicles = res;
-      console.log(this.vehicles);
-    }, error => {
-      console.log(error);
-    });
-
-    // Get and Set the Application Token
+  getToken() {
     this.service.requestToken().subscribe( res => {
       this.tokenObject = res;
       this.finalResult.token = this.tokenObject.token;
       console.log(this.finalResult);
-    }, error => {
-      console.log(error);
+      }, err => {
+      console.log(err);
+    });
+  }
+
+  // getPlanets() {
+  //   this.service.getAllPlanets().subscribe(planets => this.planets = planets);
+  // }
+
+  // getVehicles() {
+  //   this.service.getAllVehicles().subscribe(vehicles => this.vehicles = vehicles);
+  // }
+
+  getAllPlanets() {
+    this.service.getPlanets().subscribe( res => {
+      this.planets = res;
+      this.finalResult.planet_names.push(this.planets[0].name);
+      console.log(this.planets[0].name);
+    }, err => {
+      console.log(err);
     });
   }
 }
