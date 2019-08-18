@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FalconeService } from '../shared/services/falcone.service';
-
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-find-falcone',
@@ -12,16 +12,28 @@ export class FindFalconeComponent implements OnInit {
   selectedPlanet;
   selectedVehicle;
 
-  constructor(private service: FalconeService) { }
+  constructor(private service: FalconeService, private route: Router) { }
 
   ngOnInit() {
   }
 
   onPlanetSelection() {
+
     this.service.getVehiclesForSelectedPlanet(this.selectedPlanet);
+
   }
 
-  onVehicleSelection() {
-    console.log(this.selectedVehicle);
+  submitData() {
+
+    this.service.processSelectionsAndLogic(this.selectedPlanet, this.selectedVehicle);
+
+    if (!this.service.readyToProcessData) {
+      setTimeout(() => {
+        this.route.navigateByUrl('', { skipLocationChange: false}).then(() =>
+        this.route.navigate(['/findfalcone']));
+      }, 500);
+    } else {
+      this.route.navigate(['/result']);
+    }
   }
 }

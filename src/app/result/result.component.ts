@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FalconeService } from '../shared/services/falcone.service';
 
 @Component({
   selector: 'app-result',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ResultComponent implements OnInit {
 
-  constructor() { }
+  constructor(private service: FalconeService) { }
 
   ngOnInit() {
+    this.service.sendFinalData();
   }
 
 }

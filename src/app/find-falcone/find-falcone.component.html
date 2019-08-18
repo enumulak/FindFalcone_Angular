@@ -5,7 +5,8 @@
       <h2>Time Taken: {{service.totalTimeTaken}}</h2>
     </div>
     <div class="col-md-6">
-      <h4>The Token: {{service.finalResult.token}}</h4>
+      <h4>The Token: {{service.searchData.token}}</h4>
+      <!-- <h4>Planets Selected: {{service.planetsSelected}}</h4> -->
     </div>
   </div>
 
@@ -31,13 +32,19 @@
       <form>
           <div class="form-group">
             <label for="vehicleSelection">The Vehicles</label>
-            <select id="selectVehicle" class="form-control" [(ngModel)]="selectedVehicle" (change)="onVehicleSelection()" name="selectVehicle">
+            <select id="selectVehicle" class="form-control" [(ngModel)]="selectedVehicle" name="selectVehicle">
               <option *ngFor="let vehicle of service.vehiclesForSelectedPlanet" [ngValue]="vehicle">
-                {{vehicle.name}}
+                {{vehicle.name}} ({{vehicle.total_no}})
               </option>
             </select>
           </div>
         </form>
+    </div>
+  </div>
+
+  <div class="row text-center" *ngIf="selectedVehicle">
+    <div class="col-md-5">
+      <button type="submit" class="btn btn-primary" (click)="submitData()">NEXT</button>
     </div>
   </div>
 
