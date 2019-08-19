@@ -42,6 +42,7 @@ export class FalconeService {
     this.getAllVehicles();
   }
 
+  /*********** WE FIRST GET A TOKEN *******************************************************************/
   requestToken() {
 
     const httpHeaders = new HttpHeaders({
@@ -56,7 +57,11 @@ export class FalconeService {
       console.log(error);
     });
   }
+  /***************************************************************************************************/
 
+
+
+  /*********** REQUESTING DATA - PLANETS *************************************************************/
   getAllPlanets() {
     this.http.get<Planets[]>(configUrl + '/planets').subscribe(response => {
       this.planets = response;
@@ -70,7 +75,11 @@ export class FalconeService {
       console.log(error);
     });
   }
+  /***************************************************************************************************/
 
+
+
+  /*********** REQUESTING DATA - VEHICLES ************************************************************/
   getAllVehicles() {
     this.http.get<Vehicles[]>(configUrl + '/vehicles').subscribe(result => {
       this.vehicles = result;
@@ -79,7 +88,11 @@ export class FalconeService {
       console.log(error);
     });
   }
+  /***************************************************************************************************/
 
+
+
+  /*********** FUNCTION - RETURNS A LIST OF VEHICLES THAT CAN BE USED FOR SELECTED PLANET ************/
   getVehiclesForSelectedPlanet(planet) {
 
     // tslint:disable-next-line: prefer-const
@@ -96,7 +109,10 @@ export class FalconeService {
 
     this.vehiclesForSelectedPlanet = temp;
   }
+  /***************************************************************************************************/
 
+
+  /*********** FUNCTION - DISABLES PLANET SELECTION IF IT ALREADY HAS BEEN SELECTED ******************/
   setPlanetsForDisplay() {
 
     // tslint:disable-next-line: prefer-const
@@ -111,7 +127,10 @@ export class FalconeService {
 
     this.planets = temp;
   }
+  /***************************************************************************************************/
 
+
+  /*********** CORE LOGIC OF APPLICATION *************************************************************/
   processSelectionsAndLogic(planet, vehicle) {
 
     planet.isSelected = true;
@@ -129,7 +148,11 @@ export class FalconeService {
       this.readyToProcessData = true;
     }
   }
+  /***************************************************************************************************/
 
+
+
+  /*********** FUNCTION - SEND USER PROVIDED DATA TO BACKEND FOR PROCESSING AND GET THE RESULT *******/
   sendFinalData() {
     const httpHeaders = new HttpHeaders({
       'Accept': 'application/json',
@@ -146,3 +169,4 @@ export class FalconeService {
     });
   }
 }
+/***************************************************************************************************/

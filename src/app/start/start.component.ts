@@ -15,7 +15,6 @@ export class StartComponent implements OnInit {
   }
 
   onClick() {
-    console.log('Clicked!');
     this.route.navigate(['/findfalcone']);
   }
 
