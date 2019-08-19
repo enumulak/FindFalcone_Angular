@@ -28,12 +28,6 @@ export class FalconeService {
 
   planetsSelected: number;
 
-  token: string;
-  // tslint:disable-next-line: variable-name
-  planet_names: string[] = [];
-  // tslint:disable-next-line: variable-name
-  vehicle_names: string[] = [];
-
   constructor(private http: HttpClient) {
 
     this.totalTimeTaken = 0;
