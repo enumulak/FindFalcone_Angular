@@ -6,33 +6,37 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { Planets } from '../models/planets.model';
 
-const configUrl = 'https://findfalcone.herokuapp.com';
-const MAX_DATA = 4;
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class FalconeService {
 
+  // Private Variables
+  private configUrl = 'https://findfalcone.herokuapp.com';
+  private MAX_DATA = 4;
+  private tokenObject: any;
+  private finalResponseObject: any;
+  private searchData: SearchData;
+
+  // Public Variables
   planets: Planets[] = [];
   vehicles: Vehicles[] = [];
   vehiclesForSelectedPlanet: any = [];
-
-  tokenObject: any;
-  finalResponseObject: any;
   totalTimeTaken: number;
-
-  searchData: SearchData;
-  finalResponse: ResponseData;
   readyToProcessData: boolean;
-
   planetsSelected: number;
+  maxAllowedData: number;
+  finalResponse: ResponseData;
 
   constructor(private http: HttpClient) {
 
     this.totalTimeTaken = 0;
     this.planetsSelected = 0;
     this.readyToProcessData = false;
+    this.maxAllowedData = this.MAX_DATA;
 
     this.searchData = new SearchData();
     this.finalResponse = new ResponseData();
@@ -49,7 +53,7 @@ export class FalconeService {
       'Accept': 'application/json'
     });
 
-    this.http.post(configUrl + '/token', { body: ''}, { headers: httpHeaders }).subscribe(response => {
+    this.http.post(this.configUrl + '/token', { body: ''}, { headers: httpHeaders }).subscribe(response => {
       this.tokenObject = response;
       this.searchData.token = this.tokenObject.token;
       // console.log(this.tokenObject.token);
@@ -63,7 +67,7 @@ export class FalconeService {
 
   /*********** REQUESTING DATA - PLANETS *************************************************************/
   getAllPlanets() {
-    this.http.get<Planets[]>(configUrl + '/planets').subscribe(response => {
+    this.http.get<Planets[]>(this.configUrl + '/planets').subscribe(response => {
       this.planets = response;
       // tslint:disable-next-line: prefer-const
       for (let planet of this.planets) {
@@ -81,7 +85,7 @@ export class FalconeService {
 
   /*********** REQUESTING DATA - VEHICLES ************************************************************/
   getAllVehicles() {
-    this.http.get<Vehicles[]>(configUrl + '/vehicles').subscribe(result => {
+    this.http.get<Vehicles[]>(this.configUrl + '/vehicles').subscribe(result => {
       this.vehicles = result;
       // console.log(this.vehicles);
     }, error => {
@@ -113,7 +117,7 @@ export class FalconeService {
 
 
   /*********** FUNCTION - DISABLES PLANET SELECTION IF IT ALREADY HAS BEEN SELECTED ******************/
-  setPlanetsForDisplay() {
+  private setPlanetsForDisplay() {
 
     // tslint:disable-next-line: prefer-const
     let temp = [];
@@ -130,6 +134,7 @@ export class FalconeService {
   /***************************************************************************************************/
 
 
+
   /*********** CORE LOGIC OF APPLICATION *************************************************************/
   processSelectionsAndLogic(planet, vehicle) {
 
@@ -137,14 +142,19 @@ export class FalconeService {
     vehicle.total_no -= 1;
     this.planetsSelected += 1;
 
+    // tslint:disable-next-line: prefer-const
+    let tempCalc = planet.distance / vehicle.speed;
+    this.totalTimeTaken += tempCalc;
+
     this.setPlanetsForDisplay();
+
 
     this.searchData.planet_names.push(planet.name);
     this.searchData.vehicle_names.push(vehicle.name);
 
-    console.log(this.searchData);
+    // console.log(this.searchData);
 
-    if (this.searchData.planet_names.length === MAX_DATA && this.searchData.vehicle_names.length === MAX_DATA) {
+    if (this.searchData.planet_names.length === this.MAX_DATA && this.searchData.vehicle_names.length === this.MAX_DATA) {
       this.readyToProcessData = true;
     }
   }
@@ -159,11 +169,11 @@ export class FalconeService {
       'Content-Type': 'application/json'
     });
 
-    this.http.post(configUrl + '/find', this.searchData, { headers: httpHeaders }).subscribe(response => {
+    this.http.post(this.configUrl + '/find', this.searchData, { headers: httpHeaders }).subscribe(response => {
       this.finalResponseObject = response;
       this.finalResponse.planet_name = this.finalResponseObject.planet_name;
       this.finalResponse.status = this.finalResponseObject.status;
-      console.log(this.finalResponse);
+      // console.log(this.finalResponse);
     }, error => {
       console.log(error);
     });
