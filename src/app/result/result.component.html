@@ -1,3 +1,17 @@
-<p>
-  result works!
-</p>
+<div style="text-align: center;">
+    
+  <!-- <button type="submit" class="btn btn-primary" (click)="restart()">RETRY</button> -->
+
+  <h4>Result Works!</h4>
+
+  
+
+  <div *ngIf="service.finalResponse.status==='false'">
+    <h5>{{ service.finalResponse.status}}</h5>
+  </div>
+
+  <div *ngIf="service.finalResponse.status==='success'">
+    <h5>{{ service.finalResponse.status}}</h5>
+  </div>
+
+</div>

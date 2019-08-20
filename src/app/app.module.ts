@@ -8,13 +8,15 @@ import { HttpClientModule } from '@angular/common/http';
 import { FindFalconeComponent } from './find-falcone/find-falcone.component';
 import { ResultComponent } from './result/result.component';
 import { StartComponent } from './start/start.component';
+import { NavComponent } from './nav/nav.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FindFalconeComponent,
     ResultComponent,
-    StartComponent
+    StartComponent,
+    NavComponent
   ],
   imports: [
     BrowserModule,
