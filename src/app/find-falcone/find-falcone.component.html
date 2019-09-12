@@ -14,20 +14,22 @@
 <br>
 
 
-<div style="text-align: center;">
-  <form>
-    <div class="form-group">
-      <label for="planetSelection">Select the Planet you want to search in:</label>
-      <select id="selectPlanet" class="form-control" [(ngModel)]="selectedPlanet" (change)="onPlanetSelection()" name="selectPlanet">
-        <option *ngFor="let planet of service.planets" [ngValue]="planet">
-          {{planet.name}}
-        </option>
-      </select>
-    </div>
-  </form>
+<div class="row justify-content-center align-items-center h-100">
+  <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-5">
+    <form>
+      <div class="form-group">
+        <label for="planetSelection">Select the Planet you want to search in:</label>
+        <select id="selectPlanet" class="form-control" [(ngModel)]="selectedPlanet" (change)="onPlanetSelection()" name="selectPlanet">
+          <option *ngFor="let planet of service.planets" [ngValue]="planet">
+            {{planet.name}}
+          </option>
+        </select>
+      </div>
+    </form>
+  </div>
 </div>
 
-<div style="text-align: center;" *ngIf="selectedPlanet">
+<div class="row justify-content-center align-items-center h-100" *ngIf="selectedPlanet">
   <form>
     <div class="form-group">
       <label for="vehicleSelection">Select the Vehicle:</label>
