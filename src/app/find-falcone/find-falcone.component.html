@@ -18,7 +18,7 @@
   <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-5">
     <form>
       <div class="form-group">
-        <label for="planetSelection">Select the Planet you want to search in:</label>
+        <label for="planetSelection">Select the Planet you want to search in</label>
         <select id="selectPlanet" class="form-control" [(ngModel)]="selectedPlanet" (change)="onPlanetSelection()" name="selectPlanet">
           <option *ngFor="let planet of service.planets" [ngValue]="planet">
             {{planet.name}}
@@ -29,11 +29,13 @@
   </div>
 </div>
 
+<!-- <app-planet-selector></app-planet-selector> -->
+
 <div class="row justify-content-center align-items-center h-100" *ngIf="selectedPlanet">
   <div class="col col-sm-6 col-md-6 col-lg-4 col-xl-5">
     <form>
       <div class="form-group">
-        <label for="vehicleSelection">Select the Vehicle:</label>
+        <label for="vehicleSelection">Select the Vehicle</label>
         <select id="selectVehicle" class="form-control" [(ngModel)]="selectedVehicle" name="selectVehicle">
           <option *ngFor="let vehicle of service.vehiclesForSelectedPlanet" [ngValue]="vehicle">
             {{vehicle.name}} ({{vehicle.total_no}})

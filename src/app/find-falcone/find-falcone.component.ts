@@ -11,10 +11,12 @@ export class FindFalconeComponent implements OnInit {
 
   selectedPlanet;
   selectedVehicle;
+  availablePlanets;
 
   constructor(private service: FalconeService, private route: Router) { }
 
   ngOnInit() {
+    console.log(this.service.planets);
   }
 
   onPlanetSelection() {

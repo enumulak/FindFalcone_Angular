@@ -23,3 +23,9 @@ a {
     font-size: 16px;
     border-radius: 15px;
 }
+
+a:hover {
+    background-color: white;
+    color: #4e4e91;
+    border: 1px solid #4e4e91;
+}

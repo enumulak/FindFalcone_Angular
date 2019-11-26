@@ -5,10 +5,13 @@ import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
+import { FalconeService } from './shared/services/falcone.service';
 import { FindFalconeComponent } from './find-falcone/find-falcone.component';
 import { ResultComponent } from './result/result.component';
 import { StartComponent } from './start/start.component';
 import { NavComponent } from './nav/nav.component';
+import { PlanetSelectorComponent } from './find-falcone/planet-selector/planet-selector.component';
+import { VehicleSelectorComponent } from './find-falcone/vehicle-selector/vehicle-selector.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +19,9 @@ import { NavComponent } from './nav/nav.component';
     FindFalconeComponent,
     ResultComponent,
     StartComponent,
-    NavComponent
+    NavComponent,
+    PlanetSelectorComponent,
+    VehicleSelectorComponent
   ],
   imports: [
     BrowserModule,
@@ -24,7 +29,9 @@ import { NavComponent } from './nav/nav.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+    FalconeService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

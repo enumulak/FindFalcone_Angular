@@ -1,16 +1,17 @@
 
 <div *ngIf="!service.finalResponse.status">
-  <p>Loading Response..</p>
+  <p>Awaiting Response...</p>
 </div>
 
 <div *ngIf="service.finalResponse.status==='false'">
-  <h2 style="color: indianred;">Not Successful</h2>
-  <h4>Falcone continues to Evade and Hide</h4>
+  <h2 style="color: indianred;">Not Successful!</h2>
+  <p>Queen Al Falcone continues to evade and hide...</p>
 </div>
 
 <div *ngIf="service.finalResponse.status==='success'">
   <h2 style="color: green;">Success!</h2>
-  <h4>Congratulations on finding Falcone. King Shan is mighty pleased.</h4>
+  <p>Congratulations King Shan! Queen Al Falcone was located and exiled for another 15 years...You should be mighty pleased...</p>
+  <br>
   <br>
 
   <h4>Total Time Taken: {{service.totalTimeTaken}}</h4>
